@@ -33,13 +33,23 @@ jobs:
     - run: ls -R
 
     - name: zip output
-      run: zip -rj spacegame.zip ./Tailspin.SpaceGame.Web/SpaceGame/*
+      run: zip -r spacegame.zip ./Tailspin.SpaceGame.Web/SpaceGame/*
+
+    - name: zip output
+      working-directory: Tailspin.SpaceGame.Web
+      run: zip -r spacegame2.zip ./SpaceGame/*
 
     - name: upload-artifacts
       uses: actions/upload-artifact@v3
       with:
         name: spacegame
         path: spacegame.zip
+
+    - name: upload-artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: spacegame2
+        path: spacegame2.zip
       
   dev:
     runs-on: ubuntu-latest
