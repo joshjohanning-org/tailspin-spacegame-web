@@ -33,7 +33,7 @@ jobs:
     - run: ls -R
 
     - name: upload-artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: spacegame
         path: ./Tailspin.SpaceGame.Web/SpaceGame
@@ -43,7 +43,7 @@ jobs:
     needs: build
     steps:
     - name: download-artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: spacegame
 
@@ -56,5 +56,5 @@ jobs:
     - name: 'Deploy to PROD Azure webapp using OIDC'
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: tailspin-spacegame-web # Replace with your app name
+        app-name: tailspin-space-web-demo # Replace with your app name
         package: spacegame
