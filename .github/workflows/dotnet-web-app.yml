@@ -45,6 +45,7 @@ jobs:
   dev:
     runs-on: ubuntu-latest
     needs: build
+    if: github.event_name != 'pull_request'
     environment:
       name: dev
       url: ${{ steps.deploy.outputs.webapp-url }}
@@ -54,8 +55,6 @@ jobs:
       with:
         name: spacegame
 
-    - run: ls -R
-
     - name: Azure login
       uses: azure/login@v1
       with:
@@ -65,12 +64,13 @@ jobs:
       id: deploy
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: tailspin-space-web-demo
+        app-name: ${{ vars.APP_NAME }}
         package: spacegame.zip
 
   prod:
     runs-on: ubuntu-latest
     needs: [build, dev]
+    if: github.event_name != 'pull_request'
     environment:
       name: prod
       url: ${{ steps.deploy.outputs.webapp-url }}
@@ -80,8 +80,6 @@ jobs:
       with:
         name: spacegame
 
-    - run: ls -R
-
     - name: Azure login
       uses: azure/login@v1
       with:
@@ -91,5 +89,5 @@ jobs:
       id: deploy
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: tailspin-space-web-demo
+        app-name: ${{ vars.APP_NAME }}
         package: spacegame.zip
