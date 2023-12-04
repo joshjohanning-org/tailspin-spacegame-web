@@ -28,13 +28,13 @@ jobs:
 
     - name: publish
       working-directory: Tailspin.SpaceGame.Web
-      run: dotnet publish Tailspin.SpaceGame.Web.csproj -c Release -o ./SpaceGame
+      run: dotnet publish Tailspin.SpaceGame.Web.csproj -c Release -o ./spacegame
 
     - run: ls -R
 
     - name: zip output
       working-directory: Tailspin.SpaceGame.Web
-      run: zip -r spacegame.zip ./SpaceGame/*
+      run: zip -r spacegame.zip ./spacegame/*
 
     - name: upload-artifacts
       uses: actions/upload-artifact@v3
