@@ -30,8 +30,6 @@ jobs:
       working-directory: Tailspin.SpaceGame.Web
       run: dotnet publish Tailspin.SpaceGame.Web.csproj -c Release -o ./spacegame
 
-    - run: ls -R
-
     - name: zip output
       working-directory: Tailspin.SpaceGame.Web/spacegame
       run: zip -r ${{ github.workspace }}/spacegame.zip ./*
