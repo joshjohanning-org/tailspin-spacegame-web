@@ -39,7 +39,7 @@ jobs:
       uses: dorny/test-reporter@v1
       with:
         name: JEST Tests            # Name of the check run which will be created
-        path: results.xml    # Path to test results
+        path: '**/results.xml'    # Path to test results
         reporter: jest-junit        # Format of test results
 
     - name: publish
