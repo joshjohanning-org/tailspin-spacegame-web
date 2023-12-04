@@ -28,7 +28,7 @@ jobs:
 
     - name: publish
       working-directory: Tailspin.SpaceGame.Web
-      run: dotnet publish Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -c Release -o ./SpaceGame
+      run: dotnet publish Tailspin.SpaceGame.Web.csproj -c Release -o ./SpaceGame
 
     - run: ls -R
 
@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: spacegame
-        path: ./SpaceGame
+        path: ./Tailspin.SpaceGame.Web/SpaceGame
       
   dev:
     runs-on: ubuntu-latest
