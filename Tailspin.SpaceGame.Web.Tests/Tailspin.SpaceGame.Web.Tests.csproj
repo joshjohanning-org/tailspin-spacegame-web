@@ -4,7 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
-    <VSTestLogger>Logger:trx</VSTestLogger>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +18,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="JUnitTestLogger" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

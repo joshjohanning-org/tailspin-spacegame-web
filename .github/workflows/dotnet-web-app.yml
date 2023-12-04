@@ -28,12 +28,12 @@ jobs:
       
     - name: test
       working-directory: Tailspin.SpaceGame.Web.Tests
-      run: dotnet test /logger:trx
+      run: dotnet test --logger "junit;LogFilePath=results.xml"
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       with:
-        files: '**/*.trx'
+        files: '**/results.xml'
 
     - name: publish
       working-directory: Tailspin.SpaceGame.Web
