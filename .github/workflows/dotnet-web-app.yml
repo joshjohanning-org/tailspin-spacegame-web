@@ -10,6 +10,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -24,7 +28,12 @@ jobs:
       
     - name: test
       working-directory: Tailspin.SpaceGame.Web.Tests
-      run: dotnet test
+      run: dotnet test /logger:trx
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      with:
+        files: '**/*.trx'
 
     - name: publish
       working-directory: Tailspin.SpaceGame.Web
