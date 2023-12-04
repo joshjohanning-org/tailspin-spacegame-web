@@ -32,11 +32,14 @@ jobs:
 
     - run: ls -R
 
+    - name: zip output
+      run: zip -r spacegame.zip ./Tailspin.SpaceGame.Web/SpaceGame
+
     - name: upload-artifacts
       uses: actions/upload-artifact@v3
       with:
         name: spacegame
-        path: ./Tailspin.SpaceGame.Web/SpaceGame
+        path: spacegame.zip
       
   dev:
     runs-on: ubuntu-latest
@@ -57,4 +60,4 @@ jobs:
       uses: azure/webapps-deploy@v2
       with: 
         app-name: tailspin-space-web-demo # Replace with your app name
-        package: spacegame
+        package: spacegame.zip
