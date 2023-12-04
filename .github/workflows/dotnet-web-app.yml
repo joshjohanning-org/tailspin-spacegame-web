@@ -60,6 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: github.event_name != 'pull_request'
+    permissions:
+      id-token: write
     environment:
       name: dev
       url: ${{ steps.deploy.outputs.webapp-url }}
@@ -71,7 +73,10 @@ jobs:
     - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
     - name: 'Webapp deploy'
       id: deploy
       uses: azure/webapps-deploy@v2
@@ -83,6 +88,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, dev]
     if: github.event_name != 'pull_request'
+    permissions:
+      id-token: write
     environment:
       name: prod
       url: ${{ steps.deploy.outputs.webapp-url }}
@@ -94,7 +101,10 @@ jobs:
     - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
     - name: 'Webapp deploy'
       id: deploy
       uses: azure/webapps-deploy@v2
