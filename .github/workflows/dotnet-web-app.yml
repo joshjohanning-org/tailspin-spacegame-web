@@ -67,9 +67,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, dev]
     if: github.event_name != 'pull_request'
-    concurrency:
-      group: ${{ github.workflow }}-prod
-      cancel-in-progress: false
     environment:
       name: prod
       url: ${{ steps.deploy.outputs.webapp-url }}
