@@ -33,7 +33,7 @@ jobs:
     - run: ls -R
 
     - name: zip output
-      run: zip -r spacegame.zip ./Tailspin.SpaceGame.Web/SpaceGame
+      run: zip -rj spacegame.zip ./Tailspin.SpaceGame.Web/SpaceGame/*
 
     - name: upload-artifacts
       uses: actions/upload-artifact@v3
@@ -52,11 +52,12 @@ jobs:
 
     - run: ls -R
 
-    - uses: azure/login@v1
+    - name: Azure login
+      uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: 'Deploy to PROD Azure webapp using OIDC'
+    - name: 'Webapp deploy'
       uses: azure/webapps-deploy@v2
       with: 
         app-name: tailspin-space-web-demo # Replace with your app name
